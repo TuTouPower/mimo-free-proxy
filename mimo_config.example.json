@@ -1,0 +1,14 @@
+{
+    "listen": {
+        "host": "127.0.0.1",
+        "port": 8888
+    },
+    "api_key": "sk-mimo-balancer-key",
+    "backends": [
+        {"name": "sg-01", "proxy": "http://127.0.0.1:7890"},
+        {"name": "jp-01", "proxy": "http://127.0.0.1:7891"},
+        {"name": "us-01", "proxy": "http://127.0.0.1:7892"},
+        {"name": "hk-01", "proxy": "http://127.0.0.1:7893"}
+    ],
+    "fingerprint_dir": "./mimo_fingerprints"
+}

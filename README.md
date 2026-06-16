@@ -112,6 +112,37 @@ tail -f /var/log/mimo-free-proxy.log
 
 ---
 
+## 多代理轮询负载均衡
+
+当接入机场/代理池（mihomo 等）后，可启动多出口轮询模式——每个出口一个独立指纹+JWT，单入口端口轮询分发：
+
+```bash
+# 1. 准备配置文件
+cp mimo_config.example.json mimo_config.json
+# 编辑 mimo_config.json，填入代理地址
+
+# 2. 启动
+python3 mimo_balancer.py -c mimo_config.json
+```
+
+配置文件格式：
+
+```json
+{
+    "listen": {"host": "127.0.0.1", "port": 8888},
+    "api_key": "sk-mimo-balancer-key",
+    "backends": [
+        {"name": "sg-01", "proxy": "http://127.0.0.1:7890"},
+        {"name": "jp-01", "proxy": "http://127.0.0.1:7891"}
+    ],
+    "fingerprint_dir": "./mimo_fingerprints"
+}
+```
+
+- `proxy` 设为 `null` 表示直连（不经过代理）
+- 每个 backend 独立指纹 + JWT，互不影响
+- 轮询分发请求
+
 ## License
 
 MIT

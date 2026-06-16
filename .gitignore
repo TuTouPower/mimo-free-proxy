@@ -1,5 +1,7 @@
 # 运行时产物 (不应提交)
 proxy.env
 mimo-free-client
+mimo_fingerprints/
+mimo_config.json
 *.log
 __pycache__/
